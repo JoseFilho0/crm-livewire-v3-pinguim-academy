@@ -1,3 +1,7 @@
 <?php
 
-pest()->extend(Tests\TestCase::class)->in('Feature');
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+pest()->extend(Tests\TestCase::class)
+    ->use(RefreshDatabase::class)
+    ->in('Feature');
