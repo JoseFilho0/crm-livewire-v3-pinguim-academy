@@ -9,8 +9,13 @@
             <x-input label="Senha" wire:model="password" type="password" autocomplete="new-password" />
 
             <x-slot:actions>
-                <x-button label="Cancelar" type="reset" />
-                <x-button label="Registrar" class="btn-primary" type="submit" spinner="submit" />
+                <div class="w-full flex justify-between items-center">
+                    <a wire:navigate href="{{ route('login') }}" class="underline text-xs link-primary">Eu já tenho uma conta</a>
+                    <div class="flex justify-center items-center gap-2">
+                        <x-button label="Cancelar" type="reset" />
+                        <x-button label="Registrar" class="btn-primary" type="submit" spinner="submit" />
+                    </div>
+                </div>
             </x-slot:actions>
         </x-form>
     </section>
