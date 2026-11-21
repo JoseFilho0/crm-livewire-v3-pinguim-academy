@@ -1,3 +1,3 @@
 <div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
+    <x-button icon="o-power" class="btn-circle btn-ghost btn-xs" wire:click="logout" />
 </div>
