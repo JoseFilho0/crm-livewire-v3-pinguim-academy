@@ -5,7 +5,7 @@ use App\Livewire\Welcome;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, Route};
 
-Route::get('/', Welcome::class);
+Route::get('/', Welcome::class)->name('dashboard');
 Route::get('/register', Register::class)->name('auth.register');
 Route::post('/logout', function (Request $request) {
     Auth::logout();
