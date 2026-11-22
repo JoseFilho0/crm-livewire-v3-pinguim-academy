@@ -31,10 +31,12 @@ it('should be able to request for a password recovery sending notification to us
     );
 });
 
-test('making sure the email is a real email', function () {
+test('testing email property', function ($value, $rule) {
     Livewire::test(Recovery::class)
-        ->assertDontSee('Você vai receber um email com o link de recuperação de senha.')
-        ->set('email', $user->email)
+        ->set('email', $value)
         ->call('startPasswordRecovery')
-        ->assertSee('Você vai receber um email com o link de recuperação de senha.');
-});
+        ->assertHasErrors(['email' => $rule]);
+})->with([
+    'required' => ['value' => '', 'rule' => 'required'],
+    'email'    => ['value' => 'any email', 'rule' => 'email'],
+]);
