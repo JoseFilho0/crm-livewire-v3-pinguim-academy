@@ -19,7 +19,7 @@
             <x-input label="Senha" wire:model="password" type="password" autocomplete="new-password" />
 
             <div class="w-full text-right test-xs">
-                <a href="{{ route('auth.password.recovery') }}" class="underline text-xs link-primary">Esqueceu sua senha?</a>
+                <a href="{{ route('password.recovery') }}" class="underline text-xs link-primary">Esqueceu sua senha?</a>
             </div>
 
             <x-slot:actions>
