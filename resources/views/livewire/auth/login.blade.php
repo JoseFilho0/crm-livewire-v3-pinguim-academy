@@ -18,6 +18,10 @@
             <x-input label="E-mail" wire:model="email" type="email" autocomplete="email" />
             <x-input label="Senha" wire:model="password" type="password" autocomplete="new-password" />
 
+            <div class="w-full text-right test-xs">
+                <a href="{{ route('password.recovery') }}" class="underline text-xs link-primary">Esqueceu sua senha?</a>
+            </div>
+
             <x-slot:actions>
                 <div class="w-full flex justify-between items-center">
                     <a wire:navigate href="{{ route('auth.register') }}" class="underline text-xs link-primary">Eu quero criar uma conta</a>
