@@ -20,10 +20,10 @@ it('should be able to request for a password recovery sending notification to th
     $user = User::factory()->create();
 
     Livewire::test(Recovery::class)
-        ->assertDontSee('You will receive an email with the password recovery link.')
+        ->assertDontSee('Você receberá um e-mail com o link para recuperação de senha.')
         ->set('email', $user->email)
         ->call('startPasswordRecovery')
-        ->assertSee('You will receive an email with the password recovery link.');
+        ->assertSee('Você receberá um e-mail com o link para recuperação de senha.');
 
     Notification::assertSentTo(
         $user,
