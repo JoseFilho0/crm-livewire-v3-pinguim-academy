@@ -28,4 +28,11 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function withPermission(string $key): static
+    {
+        return $this->afterCreating(
+            fn (User $user) => $user->givePermissionTo('be an admin')
+        );
+    }
 }
