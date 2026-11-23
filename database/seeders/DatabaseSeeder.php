@@ -11,11 +11,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             PermissionSeeder::class,
+            UsersSeeder::class,
         ]);
 
-        User::factory()->create([
-            'name'  => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $user = User::factory()
+            ->withPermission('be an admin')
+            ->create([
+                'name'  => 'Admin CRM',
+                'email' => 'admin@crm.com',
+            ]);
     }
 }
