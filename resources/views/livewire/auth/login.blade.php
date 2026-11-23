@@ -2,12 +2,6 @@
     <section aria-labelledby="register-title" class="w-full max-w-md rounded-box border border-base-300 bg-base-100 p-6 shadow-sm sm:p-8">
         <h1 id="register-title" class="mb-6 text-center text-2xl font-semibold">Login</h1>
 
-        @if ($message = sesseion()->get('status'))
-            <x-alert icon="o-exclamation-triangle" class="alert-error">
-                {{ $message }}
-            </x-alert>
-        @endif
-
         @if ($errors->hasAny(['invalidCredentials', 'rateLimiter']))
             <x-alert icon="o-exclamation-triangle" class="alert-warning">
                 @error('invalidCredentials')

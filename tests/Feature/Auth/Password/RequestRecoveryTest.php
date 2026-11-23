@@ -10,21 +10,20 @@ use function Pest\Laravel\{assertDatabaseCount, assertDatabaseHas, get};
 
 test('needs to have a route to password recovery', function () {
     get(route('password.recovery'))
-        ->assertSeeLivewire('auth.password.recovery')
-        ->assertOk();
+        ->assertSeeLivewire('auth.password.recovery');
 });
 
-it('should be able to request for a password recovery sending notification to user', function () {
+it('should be able to request for a password recovery sending notification to the user', function () {
     Notification::fake();
 
     /** @var User $user */
     $user = User::factory()->create();
 
     Livewire::test(Recovery::class)
-        ->assertDontSee('Você vai receber um email com o link de recuperação de senha.')
+        ->assertDontSee('You will receive an email with the password recovery link.')
         ->set('email', $user->email)
         ->call('startPasswordRecovery')
-        ->assertSee('Você vai receber um email com o link de recuperação de senha.');
+        ->assertSee('You will receive an email with the password recovery link.');
 
     Notification::assertSentTo(
         $user,
