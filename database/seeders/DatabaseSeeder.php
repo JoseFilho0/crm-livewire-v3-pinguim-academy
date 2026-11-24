@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\{Can, User};
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user = User::factory()
-            ->withPermission('be an admin')
+            ->withPermission(Can::BE_AN_ADMIN)
             ->create([
                 'name'  => 'Admin CRM',
                 'email' => 'admin@crm.com',

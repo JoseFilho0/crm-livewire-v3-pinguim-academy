@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\{Permission, User};
+use App\Models\{Can, Permission, User};
 use Database\Seeders\{PermissionSeeder, UsersSeeder};
 use Illuminate\Support\Facades\{Cache, DB};
 
@@ -10,19 +10,19 @@ it('should be able to give an user a permission to do something', function () {
     /** @var User $user */
     $user = User::factory()->create();
 
-    $user->givePermissionTo('be an admin');
+    $user->givePermissionTo(Can::BE_AN_ADMIN->value);
 
     expect($user)
-        ->hasPermissionTo('be an admin')
+        ->hasPermissionTo(Can::BE_AN_ADMIN->value)
         ->toBeTrue();
 
     assertDatabaseHas('permissions', [
-        'key' => 'be an admin',
+        'key' => Can::BE_AN_ADMIN->value,
     ]);
 
     assertDatabaseHas('permission_user', [
         'user_id'       => $user->id,
-        'permission_id' => Permission::where(['key' => 'be an admin'])->first()->id,
+        'permission_id' => Permission::where(['key' => Can::BE_AN_ADMIN->value])->first()->id,
     ]);
 });
 
@@ -30,7 +30,7 @@ test('permission has to have a seeder', function () {
     seed(PermissionSeeder::class);
 
     assertDatabaseHas('permissions', [
-        'key' => 'be an admin',
+        'key' => Can::BE_AN_ADMIN->value,
     ]);
 });
 
@@ -38,12 +38,12 @@ test('seed with an admin user', function () {
     seed([PermissionSeeder::class, UsersSeeder::class]);
 
     assertDatabaseHas('permissions', [
-        'key' => 'be an admin',
+        'key' => Can::BE_AN_ADMIN->value,
     ]);
 
     assertDatabaseHas('permission_user', [
         'user_id'       => User::first()?->id,
-        'permission_id' => Permission::where(['key' => 'be an admin'])->first()?->id,
+        'permission_id' => Permission::where(['key' => Can::BE_AN_ADMIN->value])->first()?->id,
     ]);
 });
 
@@ -58,7 +58,7 @@ it('should block the access to an admin page if the user does not have the permi
 test("Let's make sure that we are using cache to store user permission", function () {
     $user = User::factory()->create();
 
-    $user->givePermissionTo('be an admin');
+    $user->givePermissionTo(Can::BE_AN_ADMIN->value);
 
     $cacheKey = "user::{$user->id}::permissions";
 
@@ -69,12 +69,12 @@ test("Let's make sure that we are using cache to store user permission", functio
 test("Let's make sure that we are using the cache the retrieve/check when the user has the given permission", function () {
     $user = User::factory()->create();
 
-    $user->givePermissionTo('be an admin');
+    $user->givePermissionTo(Can::BE_AN_ADMIN->value);
 
     $cacheKey = "user::{$user->id}::permissions";
 
     DB::listen(fn ($query) => throw new Exception('We got a hit'));
-    $user->hasPermissionTo('be an admin');
+    $user->hasPermissionTo(Can::BE_AN_ADMIN->value);
 
     expect(true)->toBeTrue();
 });
