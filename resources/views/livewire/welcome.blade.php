@@ -1,9 +1,3 @@
-<div class="bg-green-300 text-green-700">
-    Hello, world!!
-
-    @auth
-        <p>Olá, {{ auth()->user()->name }}!</p>
-
-        <livewire:auth.logout />
-    @endauth
+<div class="text-red-400 bg-red-100 rounded m-20 p-20">
+    Welcome!!
 </div>
